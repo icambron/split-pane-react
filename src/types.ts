@@ -53,7 +53,7 @@ export interface ISplitProps extends HTMLElementProps {
 export interface ISashProps {
     className?: string;
     style: React.CSSProperties;
-    render: (active: boolean) => React.ReactNode;
+    render: (active: boolean) => void;
     onDragStart: React.MouseEventHandler<HTMLDivElement>;
     onDragging: React.MouseEventHandler<HTMLDivElement>;
     onDragEnd: React.MouseEventHandler<HTMLDivElement>;

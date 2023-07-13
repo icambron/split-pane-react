@@ -60,10 +60,6 @@ const SplitPane = ({
 
     const wrapSize: number = wrapperRect[sizeName] ?? 0;
 
-    const memoizedChildren = useMemo(() => children, [children]);
-    const memoizedPropSizes = useMemo(() => [...propSizes], [propSizes]);
-    const memoizedWrapSize = useMemo(() => wrapSize, [wrapSize]);
-
     // Get limit sizes via children
     const paneLimitSizes = useMemo(() => children.map(childNode => {
         const limits = [0, Infinity];
@@ -73,7 +69,7 @@ const SplitPane = ({
             limits[1] = assertsSize(maxSize, wrapSize);
         }
         return limits;
-    }), [memoizedChildren, memoizedWrapSize]);
+    }), [children, wrapSize]);
 
     const sizes = useMemo(function () {
         let count = 0;
@@ -100,7 +96,7 @@ const SplitPane = ({
         }
 
         return res;
-    }, [memoizedPropSizes, memoizedWrapSize, memoizedChildren]);
+    }, [...propSizes, children.length, wrapSize]);
 
     const sashPosSizes = useMemo(() => (
         sizes.reduce((a, b) => [...a, a[a.length - 1] + b], [0])
